@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const ctrl = require("../controllers/videoController");
-const auth = require("../middleware/auth");
+const auth = require("../middleware/authMiddleware");
 const upload = require("../middleware/upload");
 
 // 📺 GET VIDEOS
