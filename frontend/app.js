@@ -1,8 +1,11 @@
 let allMovies = [];
 
+// BACKEND API
+const API = "https://des-02.onrender.com";
+
 // LOAD MOVIES
 async function loadMovies() {
-  const res = await fetch("http://localhost:3000/api/videos");
+  const res = await fetch(`${API}/api/videos`);
   const data = await res.json();
 
   allMovies = data;
@@ -44,15 +47,9 @@ function searchMovie() {
   displayMovies(filtered);
 }
 
-// PLAYER
-function playVideo(url) {
-  window.location.href = "player.html?url=" + encodeURIComponent(url);
-}
-
-// INIT
-loadMovies();
+// WATCH MOVIE (FIXED)
 async function watchMovie(id, url) {
-  await fetch(`http://localhost:3000/api/videos/${id}/view`, {
+  await fetch(`${API}/api/videos/${id}/view`, {
     method: "PUT"
   });
 
@@ -61,10 +58,14 @@ async function watchMovie(id, url) {
     "&url=" + encodeURIComponent(url);
 }
 
+// LIKE MOVIE (FIXED)
 async function likeMovie(id) {
-  await fetch(`http://localhost:3000/api/videos/${id}/like`, {
+  await fetch(`${API}/api/videos/${id}/like`, {
     method: "PUT"
   });
 
   loadMovies();
 }
+
+// INIT
+loadMovies();
