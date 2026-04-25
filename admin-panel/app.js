@@ -1,11 +1,13 @@
+const API = "https://des-02.onrender.com";
+
 // ======================
-// 🔐 LOGIN (1 SEL)
+// 🔐 LOGIN
 // ======================
 async function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const res = await fetch("http://localhost:3000/api/auth/login", {
+  const res = await fetch(`${API}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
@@ -32,14 +34,14 @@ const token = localStorage.getItem("token");
 // 📊 LOAD STATS
 // ======================
 async function loadStats() {
-  const res = await fetch("http://localhost:3000/api/videos");
+  const res = await fetch(`${API}/api/videos`);
   const data = await res.json();
 
   document.getElementById("videos").innerText = data.length;
 }
 
 // ======================
-// 🎬 UPLOAD VIDEO (FILE)
+// 🎬 UPLOAD VIDEO
 // ======================
 async function uploadVideo() {
   const title = document.getElementById("title").value;
@@ -51,7 +53,7 @@ async function uploadVideo() {
   formData.append("video", video);
   formData.append("thumbnail", thumbnail);
 
-  await fetch("http://localhost:3000/api/videos/upload", {
+  await fetch(`${API}/api/videos/upload`, {
     method: "POST",
     headers: {
       "Authorization": token
@@ -69,7 +71,7 @@ async function uploadVideo() {
 // 📺 LOAD VIDEOS
 // ======================
 async function loadVideos() {
-  const res = await fetch("http://localhost:3000/api/videos");
+  const res = await fetch(`${API}/api/videos`);
   const data = await res.json();
 
   const list = document.getElementById("list");
@@ -89,7 +91,7 @@ async function loadVideos() {
 // ❌ DELETE VIDEO
 // ======================
 async function deleteVideo(id) {
-  await fetch(`http://localhost:3000/api/videos/${id}`, {
+  await fetch(`${API}/api/videos/${id}`, {
     method: "DELETE",
     headers: {
       "Authorization": token
@@ -109,7 +111,7 @@ async function addAdmin() {
   const email = document.getElementById("aemail").value;
   const password = document.getElementById("apass").value;
 
-  await fetch("http://localhost:3000/api/admin/create", {
+  await fetch(`${API}/api/admin/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -131,4 +133,4 @@ async function addAdmin() {
 if (window.location.pathname.includes("dashboard")) {
   loadStats();
   loadVideos();
-}
+  }
