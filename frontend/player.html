@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Watch Video</title>
+</head>
+<body style="background:black;color:white;text-align:center">
+
+<h2>🎬 Watch Video</h2>
+
+<video id="video" controls width="80%"></video>
+
+<script>
+const url = new URLSearchParams(window.location.search).get("url");
+
+document.getElementById("video").src = url;
+</script>
+
+</body>
+</html>
